@@ -1,112 +1,74 @@
-\section{Formalisms} % (fold)
-\label{sec:formalisms}
+-----BEGIN PGP MESSAGE-----
+Version: GnuPG v1.4.10 (Darwin)
 
-\textbf{Need to rework this section and make it clearer }
-
-\subsection{$\pi-Calculus$} % (fold)
-\label{sub:_pi_calculus_}
-
-The $\pi-calculus$ is a process algebra which supports the modeling of mobile processes. It is based upon the notion of
-naming and term rewriting. Its simplest and original form has been presented in~\cite{Milner-Parrow-Walker:89}. There
-have been several extensions to the $\pi-calculus$: \emph{polyadic} (where prefixes are no longer primitive),
-\emph{typed} (introducing sorts to differentiate the types of channels in use and the values transmitted across those
-channels), etc. In~\cite{Cardelli-Ghelli-Gordon:05}, Cardelli et al introduced a variant of $\pi-calculus$ that supports
-group creation and secrecy. Its syntax is based on an asynchronous choice free polyadic $\pi-calculus$. Since
-confidentiality is a key security requirement in our application, private group creation and secrecy are therefore
-central to our application. Thus, we adopt this variant of the $\pi-calculus$. In this section we overview the
-syntax\footnote{The reader will notice a slight difference with the $\pi-calculus$ presented
-in~\cite{Cardelli-Ghelli-Gordon:05}. We reintroduced the internal prefix and non deterministic choice operator in the
-syntax, since they do not change the typing rules and do not impact on the secrecy mechanism.}, semantics and type
-system.
-
-In the variant of the $\pi-calculus$ we adopted, the types specify, for each channel, its group ant the types of values
-that can be exchanged on that channel.
-
-\begin{displaymath}
-	T::=G[T_1,\ldots, T_n]
-\end{displaymath}
-
-Let $\mathbb{C}=\{a,b,c,\ldots\}$ be a countably infinite set of channels. A process, the main element of the syntax of the language, is defined as follows. 
-\[
-P::= \left. \begin{array}{l l}
-a(b_1:T_1,\ldots,b_k:T_k).P & \quad \mbox{channel input}\\
-\overset{-}{a}<b_1,\ldots,b_k> & \quad \mbox{channel output}\\
-\tau.P & \quad \mbox{internal prefix}\\
-(\nu G)P & \quad \mbox{group creation}\\
-(\nu a:T)P & \quad \mbox{restriction}\\
-P\mid Q & \quad \mbox{parallel composition}\\
-P + Q & \quad \mbox{choice}\\
-!P & \quad \mbox{replication}\\
-\mathbf{0} & \quad \mbox{inactivity}\\
-\end{array} \right.
-\]
-
-Apart from the usual garbage collection rules ($\mathbf{0}\equiv (\nu a:T)\mathbf{0}$ and $a\notin fn(P)\implies (\nu
-a:T)P\equiv P$), the operational semantics of the language is standard (see~\cite{Parrow:01}). New rules are however
-introduced to support group creation. First, we discuss the new structural congruence rules.
-\[
-\left.\! \begin{array}{l}
-P\equiv Q\implies (\nu G)P\equiv (\nu G)Q \\
-(\nu G_1)(\nu G_2)P\equiv (\nu G_2)(\nu G_1)P\\
-G\notin fg(T)\implies (\nu G)(\nu a:T)P\equiv (\nu a:T)(\nu G)P\\
-G\notin fg(P)\implies (\nu G)(P\mid Q)\equiv P\mid (\nu G)Q
-\end{array} \right.\!
-\]
-
-The only new reduction rule comes as follows.
-
-\[P\rightarrow Q\implies (\nu G)P\rightarrow(\nu G)Q\]
-
-Finally, we briefly discuss the typing rules, especially those related to groups and type channels.
-\[
-\frac{E\vdash\diamond \quad G\notin dom(E)}{E,G\vdash\diamond}\quad
-\frac{E,G\vdash P}{E\vdash (\nu G)P}
-\]
-
-\[\frac{G\in dom(E) \quad E\vdash T_1\quad\cdots\quad E\vdash T_n}{E\vdash G[T_1,\cdots, T_n]}\]
-
-\[
-\frac{E\vdash a:G[T_1,\ldots,T_n] \quad E,b_1:T_1,\ldots,b_n:T_n\vdash P}{E\vdash a(b_1:T_1,\ldots,b_n:T_n).P}
-\]
-
-\[
-\frac{E\vdash a:G[T_1,\ldots,T_n] \quad E\vdash b_1:T_1\quad\cdots\quad E\vdash b_n:T_n}{E\vdash \overset{-}{a}<b_1,\ldots,b_n>}
-\]
-
-% subsection _pi_calculus_ (end)
-
-\subsection{Petri Nets} % (fold)
-\label{sub:petri_nets}
-
-\emph{Petri Nets} are a well known mathematical formalism to specify and analyze concurrent systems. Unlike
-$\pi-calculus$, they are automata-based formalisms and therefore, offer a graphical view of the causality and the
-concurrency exhibited by a system. There are several variants of Petri nets: \emph{elementary nets}, \emph{place and
-transition nets} $(P/T \mbox{ nets})$, \emph{colored Petri nets} $(CPN)$, \emph{object nets}, etc. In this paper, we use
-the P/T nets formalism, and therefore only overview this variant in this paper. A reader interested in elaborate
-knowledge in Petri nets in general is referred to Reisig's introductory papers
-(see~\cite{Reisig:85,Reisig:98a,Reisig:98b}).
-
-Formally, a $P/T \mbox{ net}$ is a tuple $N=<P,T,F,W,M_0>$, where $P$ is a finite set of places (also known as
-conditions), $T$ is a finite set of transitions (also known as actions), $F\subseteq (P\times T)\cup (T\times P)$ is the
-flow relation, $W: F\rightarrow (\mathbb{N}\setminus\{0\})$ is the arc weight mapping and $M_0: P\rightarrow \mathbb{N}$
-is the initial marking. Let $x\in P\cup T$, the set $^\bullet x=\{x^\prime, (x^\prime,x)\in F\}$ is called the pre-set of
-$x$, while the set $x^\bullet=\{x^{\prime\prime}, (x, x^{\prime\prime})\in F\}$ is called the post-set of $x$.
-
-Given a $P/T$ net $N=<P,T,F,W,M_0>$ and $M: P\rightarrow\mathbb{N}$ one of its markings, a transition $t~(t\in T)$ is
-$M-$\emph{enabled} ($M\overset{t}{\rightarrow}$) iff $\forall p\in~ ^\bullet p: M(p)\geq W(p,t)$. When an
-$M-$\emph{enabled} transition $t$ fires and produces a successor marking $M^\prime$ (notation being
-$M\overset{t}{\rightarrow}M^\prime$) we have $\forall p\in P, M^\prime(p)=M(p)-\hat{W}(p,t)+\hat{W}(t,p)$ where
-$\hat{W}(p,t)=W(p,t)$ if $(p,t)\in F$ and $0$ otherwise.
-
-Modeling a concurrent system using a $P/T$ net (or any other variant of \emph{Petri Net}) makes it easier not only to
-visualize the causality and concurrency, but also to analyze its key properties. These include checking the reachability
-of a marking, finding a path to a marking (from $M_0$), checking whether a transition is enabled, checking deadlock
-markings and the boundedness of the net. Most of these properties rely on the \emph{reachability} of a marking. Checking
-the reachability of a marking consists of building the reachability graph and locating the marking within. However, when
-the net is not $k-safe$, i.e., there cannot be more than $k$ (any arbitrary number) tokens at any place of the net during
-its execution, \emph{coverability} (an approximation of the reachability) is used instead. Finally, when the reachability
-graph is huge, \emph{structural analysis} is resorted to in order to verify properties.
-
-% subsection petri_nets (end)
-
-% section formalisms (end)
+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
+qAGSkLQVXbffz2xcLLLfM7QtVC8H0d/7
+=WHjl
+-----END PGP MESSAGE-----
