@@ -1,99 +1,46 @@
-%% ------------------------------------------------------------ 
-%% File: socnews.tex
-%% Author: Jose Ghislain Quenum & Benjamin Kanagwa
-%% Created: 10 2009
-%% Updated: 11 2009
-%% ------------------------------------------------------------
+-----BEGIN PGP MESSAGE-----
+Version: GnuPG v1.4.10 (Darwin)
 
-\documentclass[acmjacm]{acmtrans2m}
-
-\usepackage{alltt}
-\usepackage{amssymb}
-\usepackage{amsmath}
-\usepackage{amsfonts}
-\usepackage{array}
-\usepackage{booktabs}
-\usepackage{boxedminipage}
-\usepackage{fancybox}
-\usepackage{fancyvrb}
-\usepackage{float}
-\usepackage{graphicx}
-\usepackage{hhline}
-\usepackage[latin1]{inputenc}
-\usepackage{latexsym}
-\usepackage{lineno}
-\usepackage{listings}
-\usepackage{paralist}
-\usepackage{relsize}
-\usepackage{subfig}
-\usepackage{tabularx}
-\usepackage{theorem}
-\usepackage{url}
-\usepackage{xcolor}
-
-\graphicspath{{images/}}
-\sloppy
-
-\newtheorem{proposition}{Proposition}[subsection]
-
-\markboth{J. G. QUENUM and B. KANAGWA}{``Understand! Do Not just Guess!''}
-
-% \markboth{J. G. QUENUM and B. KANAGWA}{``A Process View of Collaboration in Social Networks''}
-
-% \title{``Understand! Do Not just Guess!''\\ A Process View of Collaboration in Social Networks}
-
-\title{A Process View of Collaboration in Social Networks}
-
-\author{ Jos\'{e}~Ghislain~QUENUM\\Makerere University \and Benjamin KANAGWA\\Makerere University}
-
-\begin{abstract}
-
-This paper proposes an algebraic approach to specify and analyze collaboration in a social network. We represent members
-of the social network and their behaviors as processes. Using a social networking application, {\tt Social News}, we
-illustrate how to specify and analyze the behaviors of members of a social network using both $\pi-calculus$ and
-\emph{P/T net}, a well known variant of \emph{Petri Net}. In combining both formalisms we wish to offer both the
-expressivity of term-rewriting formalisms (here, $\pi-calculus$) and the clarity of automata-based ones (here, \emph{P/T
-net}). We used $\pi-calculus$ for intra-groups activities (group formation and group level decision making), while
-\emph{P/T net} depicts the inter-group activities. In our specifications we took a special care of secrecy and
-confidentiality.
-
-\end{abstract}
-
-\category{C.2.4}{Computer Communication Networks}{Distributed Systems} 
-\category{F.1.2}{Computation by Abstract Devices}{Modes of Computation} 
-\terms{Specifications, Theory, Verification} 
-\keywords{Social network, crowd casting, complex adaptive systems, crowd sourcing, formal specifications, $\pi-calculus$, Petri nets}
-
-\begin{document}
-	
-	\begin{bottomstuff}
-	Authors' address: J. G. QUENUM \& B. KANAGWA, 
-	Makerere University,
-	Plot 56 Makerere University Road, Kampala, Uganda
-	P.O. Box 7062.\newline
-	\{joque,bkanagwa\}@cit.mak.ac.ug
-	\end{bottomstuff}
-	
-\maketitle
-
-\include{socnews_intro}
-\include{socnews_socnet}
-\include{socnews_formalism}
-\include{socnews_application}
-\include{socnews_grp_ext}
-\include{socnews_glb_headline}
-\include{socnews_concl}
-
-\bibliographystyle{acmtrans}
-\bibliography{socnet}
-
-\begin{received}
-	Received unknown;
-	accepted unknown;
-\end{received}
-
-\end{document}
-
-% Local Variables:
-% ispell-local-dictionary: "american"
-% End:
+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
+f8+tGhwSzhzH4UTWlkCesB9Z9HwD0aQ=
+=AiJI
+-----END PGP MESSAGE-----

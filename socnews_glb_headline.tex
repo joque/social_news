@@ -1,48 +1,53 @@
-\section{Global Headline Adoption} % (fold)
-\label{sec:global_headline_adoption}
+-----BEGIN PGP MESSAGE-----
+Version: GnuPG v1.4.10 (Darwin)
 
-At this point, {\tt Social News} has already filtered local headlines from the initial submissions. These headlines will
-now compete at a global level to adopt the final ones. In this section we model the global headline adoption step.
-
-Note that before beginning this step, the two properties mentioned in section~\ref{sub:formalization}: unicity of news
-submission and non inclusion of groups should be checked. However, this discussion is out of the scope of this paper,
-since we do not tackle model checking in this paper.
-
-In order to provide the reader with a better insight of what is concurrently taking place in the various groups we change
-our specification formalism from $\pi-calculus$ to \emph{P/T nets}. While $\pi-calculus$ proved to be very efficient at
-the local level, it becomes cumbersome at a global level. Besides, some of the requirements at the global level are more
-difficult to capture in $\pi-calculus$. For example, a group should not vote for its own news. In order to express such a
-property in $\pi-calculus$ we need to introduce data annotation on top of $\pi-calculus$. Finally, previous research has
-established a close connection between both formalisms. Indeed, Petri nets are often used to provide a semantics of
-$\pi-calculus$ expressions (e.g., see~\cite{Devillers-Klaudel-Koutny:06}). In pursuit of simplicity, we have resorted to
-use a \emph{P/T net} to model the global headline adoption.
-
-At the beginning of this step, each group has its set of local headlines generated from the previous step. A group can
-then publish its headlines to the \emph{wall} or try to form a coalition. Generally, a coalition is a group formed in
-order to increase the individual or overall utility function of its members. In our case, it increases the members'
-chances to pass news as global headlines. A coalition, when formed, should combine all the small groups which took part
-into a bigger one. When the coalition is successful, all the groups which joined hand can now published their new set of
-headlines. When the coalition fails, each group returns back to its local headlines. Then, the group can either publish
-its headlines or try another coalition.
-
-Once a group has published its headline, other groups can vote for them. In order to vote, a group must first execute
-silent transitions ($\tau$) and then select news published by another group and vote for them. All the votes are
-collected in a single place, \emph{global HL}. Figure~\ref{fig:sn-news-Petri} depicts our P/T representation of the
-global headline adoption involving three groups: $g^{\nu_\imath}$, $g^{\nu_\jmath}$ and $g^{\nu_k}$. The figure shows
-both the case where groups vote individually and form a coalition ($g^{\nu_\imath}$ and $g^{\nu_k}$).
-
-\begin{figure}
-	\centering 
-	\includegraphics[width=.85\textwidth]{socnet-Petri} 
-	\caption{Global Headline Adoption}
-	\label{fig:sn-news-Petri} 
-\end{figure}
-
-With the P/T net depicted in figure~\ref{fig:sn-news-Petri}, we can now check whether the goal defined in
-equation~\ref{eq:appgoal} is achievable. In order to do so, we simply have to check if from the initial marking $M_0$,
-where each group has its local headlines, we can reach a marking $M$ where exactly $N$\footnote{Note that because of
-silent transitions for voting we should deduct as many tokens which transited by the \emph{vote} places from the tokens
-in \emph{global HL} to obtain $N$.} news are in \emph{global HL}. The advantage in checking that property, is for example
-to quickly alert the different groups when the local headlines are not enough to reach the overall goal.
-
-% section global_headline_adoption (end)
+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
+1xBAzgic0/knrrZ1C4v/E+gtzMZf
+=8hPv
+-----END PGP MESSAGE-----

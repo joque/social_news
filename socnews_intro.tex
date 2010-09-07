@@ -1,66 +1,74 @@
-\section{Introduction} % (fold)
-\label{sec:introduction}
+-----BEGIN PGP MESSAGE-----
+Version: GnuPG v1.4.10 (Darwin)
 
-The recent development of social networking sites (e.g., {\tt facebook}, {\tt LinkedIn}, {\tt Twitter}, {\tt digg}) has
-revived research in social network systems. The predominant approaches either follow \emph{networking modeling
-techniques} (see~\cite{Berkowitz-Wellman:88}) or \emph{statistical}, and more precisely data mining, approaches for
-information extraction and prediction. However, these different approaches have occulted one important advantage of
-social networks. They can serve as a structure to provide a huge ``manpower'' in distributed problem solving. Lately, we
-have witnessed early developments of this trend in \emph{crowd sourcing} and \emph{Google Image Labeler} based on {\tt
-ESP Game} designed by \emph{Luis Von Ahn} (see~\url{http://www.espgame.org}).
-
-Similarly to \emph{Grid Computing} offering a huge computational power, social networks can tremendously contribute to
-improving decision making in \emph{complex adaptive systems}\footnote{A complex adaptive system should be understood as a
-system which involves a great deal of interaction and where the entities can easily adjust to changes in their
-environment.}. However, this demands a further understanding of social networks, and more particularly their behavioral
-perspective. In thoroughly understanding human decision making processes in social networks, one can capture the
-reproducible parts and automate them in order to support the design of concurrent systems. As well, advanced
-\emph{interaction protocols} can be derived from the interactions between humans during their task sharing in a social
-network. This research attempts to \emph{formally} specify and analyze collaboration (communication and concurrent
-behaviors) of humans in a social network.
-
-Various formalisms/approaches have been developed in \emph{Theoretical Computing} to specify, analyze and verify the
-properties of concurrent systems (see~\cite{Winskel-Nielsen:95}). These range from \emph{automata}-based formalisms
-(e.g., \emph{communicating automata} and \emph{Petri Nets}) to various process algebra (e.g., CCS, CSP, $\pi-calculus$,
-etc.) All these formalisms/approaches can capture the properties common to social networks: \emph{concurrency},
-\emph{mobility}, \emph{distribution} and \emph{communication}.
-
-Given the empirical nature of our research, the applications we use to study the behaviors of human users in social
-networks determine the quality and ``profoundness'' of the understanding we gain in return. We adopt a two-layer model
-where the social network is considered as a ``static structure"\footnote{Even though the topology of a social network is
-expected to evolve over time, we only consider its snapshot at the beginning of the application.} on top of which the
-application is deployed, i.e., the application shows how a community materializes within the social network. In this
-paper we discuss a social networking application, {\tt Social News}, where members of a social network adopt
-\emph{headlines} from a set of news concurrently submitted by some members of the social network. The evolution of a news
-to a headline follows three steps: \begin{inparaenum}[\itshape 1\upshape)] \item initial group extension; \item local
-headline adoption; followed by \item global headline adoption. \end{inparaenum} We specify and analyze the communications
-and behaviors of the members of the social network during the process using both $\pi-calculus$ and \emph{Petri Net}.
-$\pi-calculus$ is used for the intra-group communication until the adoption of local headlines, and then \emph{Petri Net}
-is used to specify and analyze the global behaviors. Especially, we use a variant of $\pi-calculus$ which caters for
-group formation and confidential communication within.
-
-The first attempts to combine the visual effects of \emph{Petri Net} and the expressivity of $\pi-calculus$ trace back to
-$\pi-nets$ (\cite{Milner:94}) and \emph{interaction diagrams} (\cite{Parrow:95}). Recently, Milner introduced
-\emph{BiGraphs}, a combination of locality and connectivity to reason about concurrent systems
-(see~\cite{Milner:08,Milner:09}). In general, diagrammatic formalisms are appealing for a number of reasons, including
-easiness of modeling, support for representation, conservation of system structure and normalization. However, when the
-size of the concepts being represented grows bigger they lack the conciseness of term rewriting-based formalisms. In
-combining both approaches in this research, we aim at offering the best of both worlds. Moreover, we take a particular
-care of confidentiality, secrecy and group formation by adopting a more suitable variant of $\pi-calculus$.
-
-It is noteworthy that this research does not pretend to develop a generic method to analyze communication and concurrent
-behaviors in a social network. Rather, we wish to demonstrate the potential of combining several formal approaches to
-further understand distributed decision making in a social network, just as in~\cite{He-Yuan-Zeng:07}. We argue that the
-novelty in our approach is twofold. First, we break free from the usual statistical approaches, which can only hint at
-trends but usually fall short to provide a rigorous interpretation. Second, we claim that our two-layer modeling is
-unprecedented. By separating the social networking application from the social network itself, we can model the former
-using any advanced logical formalism, while still regarding the later as a ``network of people''. Thus, any behavior
-observed in the system is simply the impact of the social network on the type of application being studied.
-
-The remainder of the paper is organized as follows. Section~\ref{sec:social_networks} introduces the concept of social network, while
-section~\ref{sec:formalisms} discusses the formalisms we use. Section~\ref{sec:application} discusses {\tt Social News}, our social networking application.
-Sections~\ref{sec:group_extension_local_headline} and \ref{sec:global_headline_adoption} are the main contributions of the paper. The former specifies the
-(interactions during) group formation and local headline adoption, while the later models the entire social network once the groups have been formed and
-local headlines adopted. Finally, section~\ref{sec:conlusion} draws conclusions and highlights future work.
-
-% section introduction (end)
+hQIMA77xv53FwjH7AQ//VkCV/3IL2cWxMGndACZxLStPo9wbkKJZ7dEmyq6ofJL3
+X3fRKFZpvILID6vJIiII0jBb7Y2ACN3r+C8Qn1l4HkeDHlqLWco/T/cWeRoEga5z
+jwIh53hTmKFhiJeMin7GHMC6/iHgEXGKtoU1dga9MdArOCqTiSE2/MPFsWRLTczX
+i3EMcdpmDsYsqPx/zJb/LlnnqoQxUfjEydytyM1Any2rhFrKt0byu+I9viOHQRKU
+dHB3Lxhs5vvTmb3/pxsTrV1zZiXQwVH9MSqiVVm2Kk/GUWAGYaSMm9w5o9rrEVwB
+35t6sq9JP3+BDkuoDMcknn4EwBs+f2m6HL56bk28ue+cnPfIVuoFfBjaJaCmW8mJ
+ByUL31ZyA+T8oUAi4YyLZnT8SVPmPzpXJJ/PInLk0MBoJ8so/2HQLzpoUPgofWGY
+3PH7uM9TmekaILwPE3mc8sHcD6w/Wo/IjbEsT4NX9hKE+H1BxlBtFmEDQyvp0oZB
+GuJHFJnAKqT7npYY960PhdDPMOXpv3Paj3waT1co1bMh1w49R5gobaM7J3ABajXH
+uABxhH6jauJnad3VlgnfwnRFhrgbOPTkaykwUrVNwfgeRQ4cwzkSjxfx1U/XzkCG
+ijyVgoYt7W/S4eU9vZV9NDwQUvIt4Zsx7BV1S2f/JTgmqRdq+ldyd83RXxFmi77S
+6wEUjgQodqdx1oFCVDWRMjmM/Vr6yOKE7fFZ/VV8yX3f8THV0TPXz9ULCaPl9o6P
+4X9oRdazHstYXHCYHT8crBSdhFBaT0Ww3eRRCaUqfMxjqkSaToR1Nt9xWbtYCQaQ
+5itK9Iy/gXTSP5kejEhyxNE6B8/xcluuI0vAbqWUsDLsF1OBmn38PFbt50evdJiJ
+w0l2TS/brpiL2iF8ESVZugQHPHrSELtVkpLo2YIBwj06cfg2TqFmTCgH2t4ZbhfA
+XpGjnB4BivhHsz8mSe9GqRWu3QqzaKE0aN4hPF9sOqsNbY3HNgfpWKbJq2y/o55+
+EtzJ+UFYuzgPMZ6r0ltwE2mH49QcUr8sUvcfYocobeAHYR6BCLq2tap8LH2fdpSo
+CHPG4cidY/xfUtY0JqpUf3e360+ry9DvxMqqFVCLjD7yX78+SIynDW5gjyeJ190l
+LCi4nPg1nC6A5N/czlOcivJC9ERXYUbZ8fHqFiyZfgM24yCLdwOcgqPBFbB4ZzWm
+Zj7P8hGTlS9WOhYJMeeRi+nABG73bXk01r2OE9Tgg9P+//TEL99H2PirGkGXI5Lz
+1GYESJ0Uj6BC24cO++ptf4fflla7bMcKN2193hqj8Buc4cVTR1F5Ty9/URCTRq7i
+iWvShfRwFP0M49badwYIivTRrJaiyuYb+uthOdJL3ggPE6ely0QJkQeT0DZV7GMm
+09EmwuLtLaFqHn+lh62xQVZrijqUOfMVw3sNnnHR19R4a5Xb95vMOuB+bc+Z9cig
+ckzfx3ZsfeUBbhG3TvkKyexZxnBBVksoUSn7GsEIyIUT8unT4wFbiB2yLwo1gD5y
+aiptr4DmIzDzf+tjbL51nR/udccPvIcOhW6KWCKH8vQ2Ftkmunn0YTqv+mKwskhh
+NDzR2BwUtyGz375JXjdXDhob8l2h8Sc9EkdL8u5SV/g1FqqifCET20tDeVvI7Hg1
+hiUHoioAfIZd7mnZBjImFxk01oTKUJLPM4dHhooMDHwd6bvAHIlryQtkMMc00LJR
+SbxCm2CUNxDuJiYhFKP0Z0ccYf5BAhUbYCTvYz0qr7C7+Fvz/AQEGynggylkbwF0
+SO+xQCnfcl8Sb2f0V9IGGBAjfNlDUU/FeeXq++KIAuCuHrKcjhmrsVQV/Fg5tJLo
+S656QBFCMv15Xy1zumOp9ZZ/5UHe67/Rly3XHhzV++Znlf4ZFT+CnsKkrqXKQ+mk
+h2T7wu39KlltlIJJpoMKvxPWM/Wk7BEDYsaaNfFkTJY9+5QEKShLlzK05F9bc7A3
+tOFOuD6MMj0VdNlKASEhGJz545ceHerRzwbBicPviSTlej/xOdvIiRTKj0PGxShN
+GGbHkDLy20vvpiANX/OsFhHqzakI9NTker5rLY8U8YZ342CcvL41X+6KH/+hpPbK
+J9F+H3KHy/Um2tHhVbPWwcb59ChSTmORmtJRZKL05v33pTyLlO9JugS8pwcqbH6K
+KZuaRGrJccWZGQc5XD3o+mw3VnF3kU1hACj3XwbFmvoyFo1UMyKRK66O61gLTUTb
+UnttzDecNrr2rZ3clNXI7RRadV9iXFFEg+OR0BcaMOW9/OwtQfp9WguLQu8IY9Mh
+bM23NVsQuOZ+cjcngPoBNDvHWkrWA6lzlX+xZzRfzO8O7m6gos6gpdaMMRL2r30J
+QwD4xtq8+vkJgfIr1uwjOUlF/8fljuERfMW3+0y7/PqZCO07npAbXgfXfFhJcgCj
+tElrDyLDq7Qw+/RK447P3uHOmenKTYhyTZKRrM3XSgog5V9DHYfrSa+dgMbpzzgb
+B2T9NuJBUXzXPOPKvkltW64PP7acwlkhhaiiFRnS1SPzTpZ4mhOWu3R2i+rYD42D
+uUmqiwdMpjZEr3al5QA+dVmuOIC5823S7HX7H0vyyNOX4guvKRi2xW6pul5yOnCt
+GgbWTkUyEcT7wZ2lVrBkeEBdnGXKknqLFbUCZLkWwrNQv6BxIvACtiLmastgdTRV
+M5aGN7jVTRh0biWeWaMRTus06W77gkWFI9DlIf8xIexnhu50EAveRJPlKRGtYxUf
+6c20aoNmljfzSmBXcqYwAurtd83RcBm3YYhasYZ2C4nyWeTPZZQHMvro0apU8z6K
+t6EeKMn+tvPnQETLh8bHWSQkNdazCTEBqD83IsSP2peRLiAIZD4A2psCRx1iEJuh
+sX7sOz23zPM6gA5mkSlLVEB81uNMHXzdospiuWMCJ9v+mZVUZAZKN+hnIbKn2pQm
+8BCc5QXqp2HB9Cyemb5/yjOOw6w8AxRLe1toUR2fmjTG3e3CSbxAGR3xYT/0TGp+
+VavH3qCYEDlHQQH8fvjG0uMjyZpTeYwP8BRc65btdOsTn3OcL9yk8/mFBDxgEGxA
+Y7Og8/eGgtAIRuDA2Q0crPmkrl4Ne7Bi6JcaCx0El/8Z364yh5nShGNfwblt1FGN
+twzmlqULWeFp7vaCuNZxBbm5ubns1D3dcuYPsunnlOg62nIey4ZGLqzex3wkiZ91
+e26n+7DoT4tkrX/sy01SPsoQwFwXuCUkhYYpr+XvK4yKXgKdwdDeNovmGnhL5DUG
+PNQ9hve95QANlFT3fNJ+rjIZLGrF9Kqm79oGVIrtMzHQ+zP9xImisH8jsU6tWGyD
+Rfo+v2TF7bMC9ka/Wd1QD2fpS8J4iipZAN0tWPdFFlbAViyQewJ08KEGtmoMpFv7
+KXPpWxxrWViTcHMhF5azmTlPuEn7MoqZHFduPquj+vjp6XUCo/p5nmYEGxOJrK10
+vabrd8NZkTdLS7Um7Zn7v6EOXvOesBY6E6tJasNyo2OPh/RwVYXnHqCgJslZHjlm
+TGyhjRaf6v6cnCCPcTEl94bNYjZNvXSTuvjvwTfEonBUacdBXN/kgnv44l8sXsCp
+PYaE2dzid2nh9zSREa+vv2bG52nrrz5dWHXhJbwEod3Yj4azlHJyfN8cTBAKE0yv
+HN7Dlj/c2XPBHLOcHBM5/txWlzPcjVfTUEsZm6O/RDAWe129gIsG4hhcEaGZ7FLg
+5W8N8/BiVRHka46kWjul+7OFzzzuK7IOJFHcuce40aAdsMeC+gBTGS0HeLghE5aL
++CiC527wg2Xg0mXnksYVTQcNvgAGj/EsAdLQgcC+xogoJ444bnj6wwcQi0+Td+yb
+U9gJY4udWhuH7E5eLAQwH4IegBurCmYoAETq1AvbWaou3ST4LdJqcdW2bF/5X73F
+cioGZgaMs0Ma+/qLHgj9GtLDsgCuEfRhdItpzx8T/X57bV6+pnkQ14Jkc+Z9JZ17
+39GWHsbSNGTa0qHbbqJhEXzoMI+FePpqZVtO0TPdzq+ZoFvA5uUDZb707JjZT1Ga
+m9Tbk+JU32LNoMWOLo6WosRlOeWAP1HN7OHXqb43tRNgFHn9I7gps325qjS3GOsF
+2XmTu9T1bAoQwE0KQH0qyCpSvHTGYPgarnW+eXGzsuE4Q6VickzgBfEGeO7n13ck
+pdzsmDazUErsV7wEMy8C2EQDFjM7YBm98+24jyBJ9m7FRlvkxiKVy/eKLJh+1a/J
+LIVSkZ+woPcQqoZdqzSP9MnRVa5pwQWauaLMAQekQuvKH8mLim1hf/rIeTRnmwYT
+uCP5X8AVT5sMITh9x9z0lLwDcjZeHmGAO4lHxwEx/3ZNov1N5tZlKt/iKa7Mw9JB
+3WG5SVuBpxWUN6nKrl8u
+=ZfkS
+-----END PGP MESSAGE-----

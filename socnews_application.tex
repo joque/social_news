@@ -1,100 +1,74 @@
-\section{Application} % (fold)
-\label{sec:application}
+-----BEGIN PGP MESSAGE-----
+Version: GnuPG v1.4.10 (Darwin)
 
-\textbf{Should work out the formalization for the application again}
-
-In this section, we first provide an informal description of the application. Then, we go ahead and formalize the goal it
-pursues.
-
-\subsection{Informal Description} % (fold)
-\label{sub:informal_description}
-
-We introduce {\tt Social News}, a social networking application that identifies headlines from a set of news. It shares
-some closeness with {\tt Google News} (see~\url{http://news.google.com}), a \emph{Google~\texttrademark} application that
-identifies headlines from a collection of news retrieved from different sources on the Internet. Rather than the
-centralized headline identification approach known to {\tt Google News}, {\tt Social News} uses a \emph{distributed} one.
-
-Let $\Omega=<N_\Omega,L_\Omega>$ denote a social network, where $N_\Omega$ is a set of nodes (the members of the social
-network) and $L_\Omega$ denote a set of links between elements of $N_\Omega$. For example, consider that $\Omega$ is the
-social network depicted in figure~\ref{fig:sn-news-init}. At the beginning of the process, some members of the social
-network possess news, which they wish to turn into headlines. Such nodes are represented in green color in the figure,
-whereas the other nodes are represented in blue color. Green color nodes submit their news as a whole package by sending
-a message to their immediate neighbors. A node $\nu_\ell$ will send a message of the format:
-$\nu_\ell^S=<\alpha_0^\ell,\ldots,\alpha_m^\ell>$, where the $\alpha_\imath^\ell$ are the news he intends to submit. When
-a node $\nu_p$ receives an invitation $\nu_\ell^S$, he can do one of the following four things:
-
-\begin{itemize} 
-	\item decline the invitation, by replying \emph{``no!''};
-	\item decline the invitation, but decide to forward it to other members by replying \emph{``forward!''};
-	\item accept to join the group as a simple voter, by replying \emph{``voting!''}; 
-	\item accept to join the group with his own news, by replying with another invitation $\nu_p^S=<\alpha_0^p,\ldots,\alpha_k^p>$. In this case $\nu_\ell$ can reject the condition and exclude $\nu_p$
-from the group or accept to compete locally with $\nu_p$. 
-\end{itemize}
-
-\begin{figure} 
-	\centering 
-	\includegraphics[width=.5\textwidth]{social_news} 
-	\caption{News Social Network}
-	\label{fig:sn-news-init} 
-\end{figure}
-
-In order for a node $\nu_\ell$ to change his news into headlines, he has to extend his initial group into a bigger one
-so that many more network members vote for his news. This is the \emph{group extension phase}, which is constrained by
-a deadline. Note that a node can join an extended group, while submitting his own news to another one. However, a node
-cannot submit news to two different groups. Once an extended group is created, its members have to select their
-\emph{local headlines}. These headlines will compete with those proposed by other groups. This second phase is known
-as the \emph{inter-group competition} for final headline identification. Each headline identification (whether local or
-global) involves a voting activity, where weights are assigned to the news on a scale of $\omega_0$ to $\omega_5$, with $\omega_0$
-the lowest vote. Note that all votes remain equal, i.e., a vote cast by a \emph{popular} node and one by a \emph{totally
-unknown} node are equal. Moreover, a node that submitted news to a group is neither allowed to vote for his own news, nor
-can he cast ballots for other news.
-
-While forming groups it is not allowed to form groups that are part of other groups. Forming groups requires
-fine-tuned strategies. For example, nodes should decide whether they prefer small groups, where their news are likely
-to be selected as local headlines, or larger groups where passing a news as a local headline becomes more competitive.
-On the other hand, a large group limits competition at a global level, while smaller groups make it more difficult
-at a global level. Moreover, during news transmission there is a risk of the sender node ``antagonizing'' the receiver
-since all interested nodes submit their news concurrently.
-
-% subsection informal_description (end)
-
-\subsection{Formalization} % (fold)
-\label{sub:formalization}
-
-From the informal description above, at least two properties need to be checked in {\tt Social News}'s implementation.
-These are: \begin{inparaenum}[\itshape i\upshape)] \item a node cannot submit news to more than one group; \item it is
-not allowed to form groups that are part of others. \end{inparaenum} Checking these properties requires to provide formal
-specifications. However, since we do not intend to discuss model checking in this paper, we simply provide the
-specifications of the goals pursued in {\tt Social News}. Our specification follows a declarative approach, i.e.,
-\emph{what are the nodes supposed to do, instead of how they should do it}.
-
-Consider a social network $\Omega$ with $p$ members, $k~(k\leq p)$ of which submit news to the network and expect to turn
-them into global headlines. Let $\mathcal{H}$ denote a set of headlines and $\rho_\mathcal{H}$ denote a logical formula
-which is only true when as many headlines as required have been adopted.
-
-For a node $\nu_\ell$ submitting a set of news $<\alpha_{0}^\ell,\ldots,\alpha_m^\ell>$, his goal $\rho_\ell$ is to turn at least a subset of his news set into headlines. 
-\begin{equation}
-	\label{eq:indgoals}
-	\begin{gathered}
-		\Omega\vDash\rho_\ell \iff\exists\gamma=<\alpha_\imath^\ell,\ldots,\alpha_\jmath^\ell>\subseteq\mathcal{H},
-		\gamma\subseteq <\alpha_0,\ldots,\alpha_m>
-	\end{gathered}
-\end{equation}
-
-The goal achieved by {\tt Social News} is to identify $N$\footnote{In this case $\rho_\mathcal{H}$ holds when the size of
-$\mathcal{H}$ in $N$.} headlines from the set of news submitted to the social network. This goal is a composition of the
-individual goals pursued by the nodes who submitted sets of news to the social network. Note that not all the individual
-goals need to be reached before the global one is reached. We use $CTL^*$ (see~\cite{Emerson-Halpern:86}) to specify the
-relationship between the global goal $\rho$ and the individual ones.
-
-\begin{equation}
-	\label{eq:appgoal}
-	(F\rho_\mathcal{H}\wedge E[F\rho_0\vee F\rho_1\ldots \vee F\rho_k])\implies A[\rho]
-\end{equation}
-
-% Although straightforward, due to the expressive power of $CTL^*$, model checking this specification is out the scope of
-% this paper.
-
-% subsection formalization (end)
-
-% section application (end)
+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
+ZfGHiGm8qx8z7vNZmuZLQ9Q=
+=IAux
+-----END PGP MESSAGE-----
