@@ -1,2 +1,1 @@
-socnews.tex filter=texer diff=texer
-socnews_intro.tex filter=texer diff=texer
+*.tex filter=texer
