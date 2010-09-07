@@ -1,0 +1,95 @@
+%% ------------------------------------------------------------ 
+%% File: socnews.tex
+%% Author: Jose Ghislain Quenum & Benjamin Kanagwa
+%% Created: 10 2009
+%% Updated: 11 2009
+%% ------------------------------------------------------------
+
+\documentclass[acmjacm]{acmtrans2m}
+
+\usepackage{alltt}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{boxedminipage}
+\usepackage{fancybox}
+\usepackage{fancyvrb}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{hhline}
+\usepackage[latin1]{inputenc}
+\usepackage{latexsym}
+\usepackage{lineno}
+\usepackage{listings}
+\usepackage{paralist}
+\usepackage{relsize}
+\usepackage{subfig}
+\usepackage{tabularx}
+\usepackage{theorem}
+\usepackage{url}
+\usepackage{xcolor}
+
+\graphicspath{{images/}}
+\sloppy
+
+\newtheorem{proposition}{Proposition}[subsection]
+
+\markboth{J. G. QUENUM and B. KANAGWA}{``Understand! Do Not just Guess!''}
+
+\title{``Understand! Do Not just Guess!''\\ A Process View of Collaboration in Social Networks}
+
+\author{ Jos\'{e}~Ghislain~QUENUM\\Makerere University \and Benjamin KANAGWA\\Makerere University}
+
+\begin{abstract}
+
+This paper proposes an algebraic approach to specify and analyze collaboration in a social network. We represent members
+of the social network and their behaviors as processes. Using a social networking application, {\tt Social News}, we
+illustrate how to specify and analyze the behaviors of members of a social network using both $\pi-calculus$ and
+\emph{P/T net}, a well known variant of \emph{Petri Net}. In combining both formalisms we wish to offer both the
+expressivity of term-rewriting formalisms (here, $\pi-calculus$) and the clarity of automata-based ones (here, \emph{P/T
+net}). We used $\pi-calculus$ for intra-groups activities (group formation and group level decision making), while
+\emph{P/T net} depicts the inter-group activities. In our specifications we took a special care of secrecy and
+confidentiality.
+
+\end{abstract}
+
+\category{C.2.4}{Computer Communication Networks}{Distributed Systems} 
+\category{F.1.2}{Computation by Abstract Devices}{Modes of Computation} 
+\terms{Specifications, Theory, Verification} 
+\keywords{Social network, crowd casting, complex adaptive systems, crowd sourcing, formal specifications, $\pi-calculus$, Petri nets}
+
+\begin{document}
+	
+	\begin{bottomstuff}
+	Authors' address: J. G. QUENUM \& B. KANAGWA, 
+	Makerere University,
+	Plot 56 Makerere University Road, Kampala, Uganda
+	P.O. Box 7062.\newline
+	\{joque,bkanagwa\}@cit.mak.ac.ug
+	\end{bottomstuff}
+	
+\maketitle
+
+\include{socnews_intro}
+\include{socnews_socnet}
+\include{socnews_formalism}
+\include{socnews_application}
+\include{socnews_grp_ext}
+\include{socnews_glb_headline}
+\include{socnews_concl}
+
+\bibliographystyle{acmtrans}
+\bibliography{socnet}
+
+\begin{received}
+	Received unknown;
+	accepted unknown;
+\end{received}
+
+\end{document}
+
+% Local Variables:
+% ispell-local-dictionary: "american"
+% End:

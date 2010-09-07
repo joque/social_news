@@ -1,0 +1,110 @@
+\section{Formalisms} % (fold)
+\label{sec:formalisms}
+
+\subsection{$\pi-Calculus$} % (fold)
+\label{sub:_pi_calculus_}
+
+The $\pi-calculus$ is a process algebra which supports the modeling of mobile processes. It is based upon the notion of
+naming and term rewriting. Its simplest and original form has been presented in~\cite{Milner-Parrow-Walker:89}. There
+have been several extensions to the $\pi-calculus$: \emph{polyadic} (where prefixes are no longer primitive),
+\emph{typed} (introducing sorts to differentiate the types of channels in use and the values transmitted across those
+channels), etc. In~\cite{Cardelli-Ghelli-Gordon:05}, Cardelli et al introduced a variant of $\pi-calculus$ that supports
+group creation and secrecy. Its syntax is based on an asynchronous choice free polyadic $\pi-calculus$. Since
+confidentiality is a key security requirement in our application, private group creation and secrecy are therefore
+central to our application. Thus, we adopt this variant of the $\pi-calculus$. In this section we overview the
+syntax\footnote{The reader will notice a slight difference with the $\pi-calculus$ presented
+in~\cite{Cardelli-Ghelli-Gordon:05}. We reintroduced the internal prefix and non deterministic choice operator in the
+syntax, since they do not change the typing rules and do not impact on the secrecy mechanism.}, semantics and type
+system.
+
+In the variant of the $\pi-calculus$ we adopted, the types specify, for each channel, its group ant the types of values
+that can be exchanged on that channel.
+
+\begin{displaymath}
+	T::=G[T_1,\ldots, T_n]
+\end{displaymath}
+
+Let $\mathbb{C}=\{a,b,c,\ldots\}$ be a countably infinite set of channels. A process, the main element of the syntax of the language, is defined as follows. 
+\[
+P::= \left. \begin{array}{l l}
+a(b_1:T_1,\ldots,b_k:T_k).P & \quad \mbox{channel input}\\
+\overset{-}{a}<b_1,\ldots,b_k> & \quad \mbox{channel output}\\
+\tau.P & \quad \mbox{internal prefix}\\
+(\nu G)P & \quad \mbox{group creation}\\
+(\nu a:T)P & \quad \mbox{restriction}\\
+P\mid Q & \quad \mbox{parallel composition}\\
+P + Q & \quad \mbox{choice}\\
+!P & \quad \mbox{replication}\\
+\mathbf{0} & \quad \mbox{inactivity}\\
+\end{array} \right.
+\]
+
+Apart from the usual garbage collection rules ($\mathbf{0}\equiv (\nu a:T)\mathbf{0}$ and $a\notin fn(P)\implies (\nu
+a:T)P\equiv P$), the operational semantics of the language is standard (see~\cite{Parrow:01}). New rules are however
+introduced to support group creation. First, we discuss the new structural congruence rules.
+\[
+\left.\! \begin{array}{l}
+P\equiv Q\implies (\nu G)P\equiv (\nu G)Q \\
+(\nu G_1)(\nu G_2)P\equiv (\nu G_2)(\nu G_1)P\\
+G\notin fg(T)\implies (\nu G)(\nu a:T)P\equiv (\nu a:T)(\nu G)P\\
+G\notin fg(P)\implies (\nu G)(P\mid Q)\equiv P\mid (\nu G)Q
+\end{array} \right.\!
+\]
+
+The only new reduction rule comes as follows.
+
+\[P\rightarrow Q\implies (\nu G)P\rightarrow(\nu G)Q\]
+
+Finally, we briefly discuss the typing rules, especially those related to groups and type channels.
+\[
+\frac{E\vdash\diamond \quad G\notin dom(E)}{E,G\vdash\diamond}\quad
+\frac{E,G\vdash P}{E\vdash (\nu G)P}
+\]
+
+\[\frac{G\in dom(E) \quad E\vdash T_1\quad\cdots\quad E\vdash T_n}{E\vdash G[T_1,\cdots, T_n]}\]
+
+\[
+\frac{E\vdash a:G[T_1,\ldots,T_n] \quad E,b_1:T_1,\ldots,b_n:T_n\vdash P}{E\vdash a(b_1:T_1,\ldots,b_n:T_n).P}
+\]
+
+\[
+\frac{E\vdash a:G[T_1,\ldots,T_n] \quad E\vdash b_1:T_1\quad\cdots\quad E\vdash b_n:T_n}{E\vdash \overset{-}{a}<b_1,\ldots,b_n>}
+\]
+
+% subsection _pi_calculus_ (end)
+
+\subsection{Petri Nets} % (fold)
+\label{sub:petri_nets}
+
+\emph{Petri Nets} are a well known mathematical formalism to specify and analyze concurrent systems. Unlike
+$\pi-calculus$, they are automata-based formalisms and therefore, offer a graphical view of the causality and the
+concurrency exhibited by a system. There are several variants of Petri nets: \emph{elementary nets}, \emph{place and
+transition nets} $(P/T \mbox{ nets})$, \emph{colored Petri nets} $(CPN)$, \emph{object nets}, etc. In this paper, we use
+the P/T nets formalism, and therefore only overview this variant in this paper. A reader interested in elaborate
+knowledge in Petri nets in general is referred to Reisig's introductory papers
+(see~\cite{Reisig:85,Reisig:98a,Reisig:98b}).
+
+Formally, a $P/T \mbox{ net}$ is a tuple $N=<P,T,F,W,M_0>$, where $P$ is a finite set of places (also known as
+conditions), $T$ is a finite set of transitions (also known as actions), $F\subseteq (P\times T)\cup (T\times P)$ is the
+flow relation, $W: F\rightarrow (\mathbb{N}\setminus\{0\})$ is the arc weight mapping and $M_0: P\rightarrow \mathbb{N}$
+is the initial marking. Let $x\in P\cup T$, the set $^\bullet x=\{x^\prime, (x^\prime,x)\in F\}$ is called the pre-set of
+$x$, while the set $x^\bullet=\{x^{\prime\prime}, (x, x^{\prime\prime})\in F\}$ is called the post-set of $x$.
+
+Given a $P/T$ net $N=<P,T,F,W,M_0>$ and $M: P\rightarrow\mathbb{N}$ one of its markings, a transition $t~(t\in T)$ is
+$M-$\emph{enabled} ($M\overset{t}{\rightarrow}$) iff $\forall p\in~ ^\bullet p: M(p)\geq W(p,t)$. When an
+$M-$\emph{enabled} transition $t$ fires and produces a successor marking $M^\prime$ (notation being
+$M\overset{t}{\rightarrow}M^\prime$) we have $\forall p\in P, M^\prime(p)=M(p)-\hat{W}(p,t)+\hat{W}(t,p)$ where
+$\hat{W}(p,t)=W(p,t)$ if $(p,t)\in F$ and $0$ otherwise.
+
+Modeling a concurrent system using a $P/T$ net (or any other variant of \emph{Petri Net}) makes it easier not only to
+visualize the causality and concurrency, but also to analyze its key properties. These include checking the reachability
+of a marking, finding a path to a marking (from $M_0$), checking whether a transition is enabled, checking deadlock
+markings and the boundedness of the net. Most of these properties rely on the \emph{reachability} of a marking. Checking
+the reachability of a marking consists of building the reachability graph and locating the marking within. However, when
+the net is not $k-safe$, i.e., there cannot be more than $k$ (any arbitrary number) tokens at any place of the net during
+its execution, \emph{coverability} (an approximation of the reachability) is used instead. Finally, when the reachability
+graph is huge, \emph{structural analysis} is resorted to in order to verify properties.
+
+% subsection petri_nets (end)
+
+% section formalisms (end)

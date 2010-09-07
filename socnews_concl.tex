@@ -1,0 +1,22 @@
+\section{Conlusion} % (fold)
+\label{sec:conlusion}
+
+In this paper, we used $\pi-calculus$ and P/T nets to specify and analyze a social networking application, {\tt Social News}. Our specifications showed two levels of interactions: within a group with
+secrecy and confidentiality and at a global level. As for the analysis, we focused on verifying the correctness of the interactions and the achievability of the overall goal of the application.
+
+In introduction to this paper, we claimed that one should turn to algebraic approaches instead of the purely statistical ones, in order to gain a deeper understanding of behaviors in social networks.
+However, our claim does not suggest to squarely rule out the statistical approaches. Rather, we advocate for a hybrid approach, given the wealth of data/information available in social networks.
+Indeed, the algebraic approaches could provide a concise and accurate model of the social networking application at hand, while the statistical approaches help identify new trends or development of the
+initial model for further refinement. In short, our future research will seek to reconcile these two types of approaches.
+
+By attempting to analyze a social networking using algebraic approaches, this research aims at addressing more complex questions such as \emph{how does the behavior of a social network evolve over
+time?} Such understanding can help further automate processes within a social network and reach the ideal situation where humans interact with computers in a transparent and flexible manner.
+
+In this paper, we have adopted $CTL^*$ as a formalism to represent a task being carried out. Then we represented the execution of the task using P/T net on top of $\pi-calculus$ terms. In the future,
+we wish to investigate how to model check the execution of the task using the P/T net. More generally, following the foundation laid by Groote and Reniers (see~\cite{Groote-Reniers:01}), we wish to
+investigate more appropriate methodologies for process algebraic verification in social networking applications.
+
+Another important question raised in this research is \emph{task division}. Given a task submitted to a community in a social network, how to come up with a possibly automated fair division of the task
+into subtasks among its members.
+
+% section conlusion (end)

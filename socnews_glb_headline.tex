@@ -1,0 +1,48 @@
+\section{Global Headline Adoption} % (fold)
+\label{sec:global_headline_adoption}
+
+At this point, {\tt Social News} has already filtered local headlines from the initial submissions. These headlines will
+now compete at a global level to adopt the final ones. In this section we model the global headline adoption step.
+
+Note that before beginning this step, the two properties mentioned in section~\ref{sub:formalization}: unicity of news
+submission and non inclusion of groups should be checked. However, this discussion is out of the scope of this paper,
+since we do not tackle model checking in this paper.
+
+In order to provide the reader with a better insight of what is concurrently taking place in the various groups we change
+our specification formalism from $\pi-calculus$ to \emph{P/T nets}. While $\pi-calculus$ proved to be very efficient at
+the local level, it becomes cumbersome at a global level. Besides, some of the requirements at the global level are more
+difficult to capture in $\pi-calculus$. For example, a group should not vote for its own news. In order to express such a
+property in $\pi-calculus$ we need to introduce data annotation on top of $\pi-calculus$. Finally, previous research has
+established a close connection between both formalisms. Indeed, Petri nets are often used to provide a semantics of
+$\pi-calculus$ expressions (e.g., see~\cite{Devillers-Klaudel-Koutny:06}). In pursuit of simplicity, we have resorted to
+use a \emph{P/T net} to model the global headline adoption.
+
+At the beginning of this step, each group has its set of local headlines generated from the previous step. A group can
+then publish its headlines to the \emph{wall} or try to form a coalition. Generally, a coalition is a group formed in
+order to increase the individual or overall utility function of its members. In our case, it increases the members'
+chances to pass news as global headlines. A coalition, when formed, should combine all the small groups which took part
+into a bigger one. When the coalition is successful, all the groups which joined hand can now published their new set of
+headlines. When the coalition fails, each group returns back to its local headlines. Then, the group can either publish
+its headlines or try another coalition.
+
+Once a group has published its headline, other groups can vote for them. In order to vote, a group must first execute
+silent transitions ($\tau$) and then select news published by another group and vote for them. All the votes are
+collected in a single place, \emph{global HL}. Figure~\ref{fig:sn-news-Petri} depicts our P/T representation of the
+global headline adoption involving three groups: $g^{\nu_\imath}$, $g^{\nu_\jmath}$ and $g^{\nu_k}$. The figure shows
+both the case where groups vote individually and form a coalition ($g^{\nu_\imath}$ and $g^{\nu_k}$).
+
+\begin{figure}
+	\centering 
+	\includegraphics[width=.85\textwidth]{socnet-Petri} 
+	\caption{Global Headline Adoption}
+	\label{fig:sn-news-Petri} 
+\end{figure}
+
+With the P/T net depicted in figure~\ref{fig:sn-news-Petri}, we can now check whether the goal defined in
+equation~\ref{eq:appgoal} is achievable. In order to do so, we simply have to check if from the initial marking $M_0$,
+where each group has its local headlines, we can reach a marking $M$ where exactly $N$\footnote{Note that because of
+silent transitions for voting we should deduct as many tokens which transited by the \emph{vote} places from the tokens
+in \emph{global HL} to obtain $N$.} news are in \emph{global HL}. The advantage in checking that property, is for example
+to quickly alert the different groups when the local headlines are not enough to reach the overall goal.
+
+% section global_headline_adoption (end)
